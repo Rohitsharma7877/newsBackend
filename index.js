@@ -13,11 +13,11 @@ app.use(express.json());
 // API key from environment variables
 const API_KEY = process.env.API_KEY;
 
-app.get("/", (req, res) => {
-  res.send("Welcome to NEWS App");
-});
+// app.get("/", (req, res) => {
+//   res.send("Welcome to NEWS App");
+// });
 
-app.get("/news", async (req, res) => {
+app.get("/", async (req, res) => {
     console.log("Request received:", req.query);
   const country = req.query.country || "us"; // Default country
   const category = req.query.category || ""; // Optional category
