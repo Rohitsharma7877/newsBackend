@@ -25,7 +25,7 @@ app.get("/", async (req, res) => {
   const page = Number(req.query.page) || 1; // Optional page number
 
   // Construct the API URL dynamically
-  let apiUrl = `https://newsapi.org/v2/top-headlines/sources?country=${country}&apiKey=${API_KEY}`;
+  let apiUrl = `http://newsapi.org/v2/top-headlines/sources?country=${country}&apiKey=${API_KEY}`;
   if (category) {
     apiUrl += `&category=${category}`;
   }
@@ -58,3 +58,8 @@ const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+
+
+// API_KEY=c003f70919aa4fc4bb23071b5c77755e
+//  API_KEY=6aa2a3ab71d94461afa539847b895a91
