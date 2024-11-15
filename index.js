@@ -5,7 +5,7 @@ require("dotenv").config();
 
 const app = express();
 const corsOptions = {
-  origin: "*", // Allow all origins, adjust as needed for security
+  origin: "http://localhost:3000", 
 };
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -13,11 +13,12 @@ app.use(express.json());
 // API key from environment variables
 const API_KEY = process.env.API_KEY;
 
-// app.get("/", (req, res) => {
-//   res.send("Welcome to NEWS App");
-// });
+app.get("/", (req, res) => {
+  res.send("Welcome to NEWS App");
+});
 
 app.get("/news", async (req, res) => {
+    console.log("Request received:", req.query);
   const country = req.query.country || "us"; // Default country
   const category = req.query.category || ""; // Optional category
   const itemsPerPage = Number(req.query.itemsPerPage) || 10; // Optional pagination size
@@ -31,14 +32,15 @@ app.get("/news", async (req, res) => {
 
   try {
     const response = await axios.get(apiUrl);
-    const allSources = response.data.sources || [];
+    console.log("News data:", response.data);
 
+
+    const allSources = response.data.sources || [];
     // Apply pagination manually
     const paginatedSources = allSources.slice(
       (page - 1) * itemsPerPage,
       page * itemsPerPage
     );
-
     res.json({
       totalSources: allSources.length,
       totalPages: Math.ceil(allSources.length / itemsPerPage),
