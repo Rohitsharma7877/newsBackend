@@ -48,7 +48,7 @@ app.get("/news", async (req, res) => {
       sources: paginatedSources,
     });
   } catch (error) {
-    console.error("Error fetching news data:", error.message);
+    console.error("Error fetching news data:", error.messagees);
     res.status(500).json({ error: "Failed to fetch news data" });
   }
 });
